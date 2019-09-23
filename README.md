@@ -1,4 +1,4 @@
 # MyHero
 Android APP
 
-API: marvel.com
+API: https://rickandmortyapi.com/documentation/#introduction
