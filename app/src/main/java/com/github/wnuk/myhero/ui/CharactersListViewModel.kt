@@ -3,9 +3,9 @@ package com.github.wnuk.myhero.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.github.wnuk.myhero.infrastracture.ApiInterface
+import com.github.wnuk.myhero.infrastracture.dto.Character
 import com.github.wnuk.myhero.infrastracture.dto.CharacterDTO
 import com.github.wnuk.myhero.infrastracture.services.ApiClient
-import com.github.wnuk.myhero.model.Character
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -26,13 +26,15 @@ class CharactersListViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .subscribe ({
                     result ->
-                Log.d("Result", "There are ${result.results[0].name} Java developers in Lagos ${result.info.next} ")
+                handleResponse(result)
             }, { error ->
                 error.printStackTrace()
             }))
     }
 
-    private fun handleResponse(list: List<CharacterDTO>) {
+    private fun handleResponse(result: CharacterDTO) {
+        Log.d("Result", "Response size: ${result.info.count} ")
+        listOfCharacters = result.results
     }
 
     fun onDestroy(){

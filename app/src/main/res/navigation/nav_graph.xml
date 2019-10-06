@@ -18,7 +18,11 @@
         android:id="@+id/charactersListFragment"
         android:name="com.github.wnuk.myhero.ui.CharactersListFragment"
         android:label="characters_list_fragment"
-        tools:layout="@layout/characters_list_fragment" />
+        tools:layout="@layout/characters_list_fragment" >
+        <action
+            android:id="@+id/character_list_action"
+            app:destination="@id/characterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.github.wnuk.myhero.ui.character.CharacterFragment"

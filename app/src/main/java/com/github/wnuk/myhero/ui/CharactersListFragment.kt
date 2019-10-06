@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
+import com.github.wnuk.myhero.infrastracture.ListCharacterAdapter
+import kotlinx.android.synthetic.main.characters_list_fragment.*
 
 class CharactersListFragment : Fragment() {
 
@@ -18,6 +20,7 @@ class CharactersListFragment : Fragment() {
 
     private lateinit var viewModel: CharactersListViewModel
     private lateinit var binding: CharactersListFragmentBinding
+    private lateinit var adapter: ListCharacterAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.characters_list_fragment, container, false)
@@ -29,6 +32,8 @@ class CharactersListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CharactersListViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.loadData()
+        adapter = ListCharacterAdapter(viewModel.listOfCharacters)
+        characters_list_fragment__list.adapter = adapter
     }
 
     override fun onDestroyView() {

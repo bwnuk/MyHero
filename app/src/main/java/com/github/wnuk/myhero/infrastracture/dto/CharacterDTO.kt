@@ -1,6 +1,5 @@
 package com.github.wnuk.myhero.infrastracture.dto
 
-import com.github.wnuk.myhero.model.Character
 
 data class CharacterDTO(var info: InfoCharacter,
                            var results: List<Character>)
