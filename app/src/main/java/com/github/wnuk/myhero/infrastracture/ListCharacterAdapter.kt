@@ -22,7 +22,6 @@ class ListCharacterAdapter (private var list: List<Character>) : RecyclerView.Ad
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-
         fun bind(character: Character, position: Int){
             itemView.character_list_item__item.setOnClickListener { view ->
                 view.findNavController().navigate(R.id.character_list_action)

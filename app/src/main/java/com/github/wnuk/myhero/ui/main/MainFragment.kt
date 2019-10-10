@@ -1,5 +1,6 @@
 package com.github.wnuk.myhero.ui.main
 
+import android.content.pm.ActivityInfo
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 

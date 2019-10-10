@@ -1,15 +1,24 @@
 package com.github.wnuk.myhero.ui
 
+import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
 import com.github.wnuk.myhero.infrastracture.ListCharacterAdapter
+import com.github.wnuk.myhero.infrastracture.dto.CharacterDTO
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.characters_list_fragment.*
 
 class CharactersListFragment : Fragment() {
@@ -21,23 +30,54 @@ class CharactersListFragment : Fragment() {
     private lateinit var viewModel: CharactersListViewModel
     private lateinit var binding: CharactersListFragmentBinding
     private lateinit var adapter: ListCharacterAdapter
+    private var myCompositeDisposable: CompositeDisposable? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.characters_list_fragment, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.characters_list_fragment, container, false)
+         layoutManager = LinearLayoutManager(inflater.context)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CharactersListViewModel::class.java)
+        characters_list_fragment__list.layoutManager = layoutManager
+
+        myCompositeDisposable = CompositeDisposable()
         binding.viewmodel = viewModel
-        viewModel.loadData()
+
+        myCompositeDisposable?.add(viewModel.loadData()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({ result ->
+                handleResponse(result)
+            }, { error ->
+                error.printStackTrace()
+            })
+        )
+    }
+
+    private fun handleResponse(result: CharacterDTO) {
+        Log.d("Result CharacterPages", "Response size: ${result.info.pages} Next request: ${result.info.next}")
+
+        viewModel.listOfCharacters = result.results
+
         adapter = ListCharacterAdapter(viewModel.listOfCharacters)
         characters_list_fragment__list.adapter = adapter
+
+        Log.d("RecyclerView", "List size: ${adapter.itemCount} ")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.onDestroy()
+        myCompositeDisposable?.dispose()
+        myCompositeDisposable?.clear()
     }
 }

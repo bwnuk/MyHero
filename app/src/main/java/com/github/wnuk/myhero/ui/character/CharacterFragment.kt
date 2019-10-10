@@ -1,5 +1,6 @@
 package com.github.wnuk.myhero.ui.character
 
+import android.content.pm.ActivityInfo
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class CharacterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.character_fragment, container, false)
     }
 
