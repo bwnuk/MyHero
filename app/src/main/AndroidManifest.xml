@@ -4,10 +4,12 @@
     package="com.github.wnuk.myhero">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <dist:module dist:instant="true" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,6 +31,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.BaseActivity" />
+        <receiver
+            android:name=".infrastracture.receiver.ConnectionReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

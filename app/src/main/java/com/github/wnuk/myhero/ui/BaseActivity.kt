@@ -1,34 +1,38 @@
 package com.github.wnuk.myhero.ui
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.github.wnuk.myhero.BuildConfig
+import com.github.wnuk.myhero.MyApplication
 import com.github.wnuk.myhero.R
+import com.github.wnuk.myhero.infrastracture.receiver.ConnectionReceiver
 import com.github.wnuk.myhero.ui.settings.SettingsActivity
 import com.log4k.DefaultAppender
 import com.log4k.Level
 import com.log4k.Log4k
 import com.log4k.android.AndroidAppender
-import kotlinx.android.synthetic.main.base_main.*
-import kotlinx.android.synthetic.main.main_fragment.*
 import java.io.File
 import java.io.PrintWriter
 
-class BaseActivity : AppCompatActivity() {
+class BaseActivity : AppCompatActivity(), ConnectionReceiver.ConnectionRecieverListener {
+    override fun onNetworkConnectionChange(isConnected: Boolean) {
+        if (!isConnected) {
+            Toast.makeText(this, "NO INTERNET", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     var isRotate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +41,10 @@ class BaseActivity : AppCompatActivity() {
         pref()
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         setSupportActionBar(findViewById(R.id.custom_toolbar))
+
+        baseContext.registerReceiver(ConnectionReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
+        MyApplication.instance.setConnectionListener(this)
         if (BuildConfig.DEBUG) {
             Log4k.add(Level.Verbose, ".*", AndroidAppender())
             Log4k.add(Level.Verbose, "com\\.log4k\\.sample\\..+", DefaultAppender())
@@ -67,15 +75,7 @@ class BaseActivity : AppCompatActivity() {
         return true
     }
 
-    fun pref() {
-        val sharedPref = this.getSharedPreferences(
-            getString(R.string.pref_file_key), Context.MODE_PRIVATE) ?: return
-        isRotate = sharedPref.getBoolean(getString(R.string.pref_file_rotate), true)
-        Log.d("BaseActivity", "SharedPreferences: ${isRotate}")
-        if (isRotate) {
-            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-        }
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
@@ -99,4 +99,16 @@ class BaseActivity : AppCompatActivity() {
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun pref() {
+        val sharedPref = this.getSharedPreferences(
+            getString(R.string.pref_file_key), Context.MODE_PRIVATE) ?: return
+        isRotate = sharedPref.getBoolean(getString(R.string.pref_file_rotate), true)
+        Log.d("BaseActivity", "SharedPreferences: ${isRotate}")
+        if (isRotate) {
+            this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        }
+    }
+
+
 }

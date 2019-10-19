@@ -25,5 +25,5 @@
     <!--Preferences-->
     <string name="pref_file_key">SettingsPref</string>
     <string name="pref_file_rotate">Rotate</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
