@@ -71,8 +71,6 @@ class MainFragment : Fragment() {
                 error.printStackTrace()
             })
         )
-
-        Log.d("RecyclerView", "List size: ${viewModel.listOfCharacters.size} ")
     }
 
     override fun onDestroyView() {

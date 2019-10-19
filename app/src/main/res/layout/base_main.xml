@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".ui.BaseActivity">
 
+    <include android:id="@+id/custom_toolbar" layout="@layout/custom_toolbar"/>
+
     <fragment
         android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"

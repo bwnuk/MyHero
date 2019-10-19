@@ -64,7 +64,7 @@ class CharactersListFragment : Fragment() {
         )
     }
 
-    public fun handleResponse(result: List<Character>) {
+    private fun handleResponse(result: List<Character>) {
         Log.d("R", "Response size: ${result.size} ")
         viewModel.listOfCharacters = result
         adapter = ListCharacterAdapter(viewModel.listOfCharacters)

@@ -30,9 +30,4 @@ class CharactersListViewModel(application: Application) :  AndroidViewModel(appl
         val requestInterface = ApiClient.getClient().create(ApiInterface::class.java)
         return requestInterface.getAlCharacters()
     }
-
-    public fun handleResponse(result: List<Character>) {
-        Log.d("R", "Response size: ${result.size} ")
-        listOfCharacters = result
-    }
 }
