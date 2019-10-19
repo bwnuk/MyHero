@@ -4,4 +4,5 @@
     <dimen name="small_space">10dp</dimen>
     <dimen name="gap_between_items">3dp</dimen>
     <dimen name="small_padding">2dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

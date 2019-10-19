@@ -1,6 +1,5 @@
 package com.github.wnuk.myhero.ui.character
 
-import android.content.pm.ActivityInfo
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +15,7 @@ class CharacterFragment : Fragment() {
         fun newInstance() = CharacterFragment()
     }
 
-    private lateinit var viewModel: CharacterViewModel
+    private lateinit var itemViewModel: CharacterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +27,7 @@ class CharacterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
-        // TODO: Use the ViewModel
+        itemViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
     }
 
 }

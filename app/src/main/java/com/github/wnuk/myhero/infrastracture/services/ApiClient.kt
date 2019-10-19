@@ -1,6 +1,5 @@
 package com.github.wnuk.myhero.infrastracture.services
 
-import com.github.wnuk.myhero.infrastracture.ApiInterface
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

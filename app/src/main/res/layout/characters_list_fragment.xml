@@ -5,12 +5,12 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.github.wnuk.myhero.ui.CharactersListViewModel" />
+            type="com.github.wnuk.myhero.ui.character.CharactersListViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.CharactersListFragment"
+        tools:context=".ui.character.CharactersListFragment"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView

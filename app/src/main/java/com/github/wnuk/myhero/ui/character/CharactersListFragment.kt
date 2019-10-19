@@ -1,6 +1,5 @@
-package com.github.wnuk.myhero.ui
+package com.github.wnuk.myhero.ui.character
 
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
-import com.github.wnuk.myhero.infrastracture.ListCharacterAdapter
-import com.github.wnuk.myhero.infrastracture.dto.CharacterDTO
+import com.github.wnuk.myhero.infrastracture.adapters.ListCharacterAdapter
+import com.github.wnuk.myhero.model.character.Character
+import com.github.wnuk.myhero.model.character.CharacterResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -53,26 +53,22 @@ class CharactersListFragment : Fragment() {
         myCompositeDisposable = CompositeDisposable()
         binding.viewmodel = viewModel
 
-        myCompositeDisposable?.add(viewModel.loadData()
+        myCompositeDisposable?.add(viewModel.charactersObservable
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({ result ->
-                handleResponse(result)
+                handleResponse(result.map { Character(it) })
             }, { error ->
                 error.printStackTrace()
             })
         )
     }
 
-    private fun handleResponse(result: CharacterDTO) {
-        Log.d("Result CharacterPages", "Response size: ${result.info.pages} Next request: ${result.info.next}")
-
-        viewModel.listOfCharacters = result.results
-
+    public fun handleResponse(result: List<Character>) {
+        Log.d("R", "Response size: ${result.size} ")
+        viewModel.listOfCharacters = result
         adapter = ListCharacterAdapter(viewModel.listOfCharacters)
         characters_list_fragment__list.adapter = adapter
-
-        Log.d("RecyclerView", "List size: ${adapter.itemCount} ")
     }
 
     override fun onDestroyView() {

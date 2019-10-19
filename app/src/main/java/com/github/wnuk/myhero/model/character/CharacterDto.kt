@@ -1,16 +1,16 @@
-package com.github.wnuk.myhero.infrastracture.dto
+package com.github.wnuk.myhero.model.character
 
 
-data class CharacterDTO(var info: InfoCharacter,
-                           var results: List<Character>)
+data class CharacterResult(var info: InfoCharacter,
+                        var results: List<CharacterDto>)
 
 data class InfoCharacter(val count: Int,
                          var pages: Int,
                          var next: String,
                          var prev: String)
 
-data class Character(
-    val id: Int,
+data class CharacterDto(
+    val id: String,
     val name: String,
     var status: String,
     val species: String,

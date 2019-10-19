@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">My Hero</string>
 
-<!--Menu -->
+    <!--Menu -->
     <string name="menu_card_characters__name">Characters</string>
     <string name="menu_card_episodes__name">Episodes</string>
     <string name="menu_card_locations__name">Locations</string>
     <string name="menu_card_next">See more\></string>
 
-<!--Character-->
+    <!--Character-->
     <string name="character_page__name">Name</string>
     <string name="character_page__status">Status</string>
     <string name="character_page__species">Species</string>

@@ -28,6 +28,7 @@ class BaseActivity : AppCompatActivity() {
         } else {
             Log4k.add(Level.Assert, "com\\.log4k\\.sample\\..+", DefaultAppender(writer = PrintWriter(File(filesDir, "log.txt"))))
         }
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
