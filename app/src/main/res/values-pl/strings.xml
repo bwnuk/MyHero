@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Hero</string>
+    <string name="character_page__gender">Płeć</string>
+    <string name="character_page__location">Lokalizacja</string>
+    <string name="character_page__name">Imię</string>
+    <string name="character_page__origin">Pochodzenie</string>
+    <string name="character_page__species">Gatunek</string>
+    <string name="character_page__status">Status</string>
+    <string name="character_page__type">Typ</string>
+    <string name="main_card_characters__name">Postacie</string>
+    <string name="main_card_episodes__name">Odcinki</string>
+    <string name="main_card_locations__name">Lokalizacje</string>
+    <string name="main_card_next">Zobacz więcej></string>
+    <string name="menu_main_settings">Ustawienia</string>
+    <string name="settings_switch">Pozwól aplikacji na obrót</string>
+    <string name="title_activity_settings">Ustawienia</string>
+</resources>

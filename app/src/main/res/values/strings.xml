@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">My Hero</string>
+    <string name="app_name">RnM Characters</string>
+
+    <!--Main -->
+    <string name="main_card_characters__name">Characters</string>
+    <string name="main_card_episodes__name">Episodes</string>
+    <string name="main_card_locations__name">Locations</string>
+    <string name="main_card_next">See more\></string>
+
+    <!--Menu-->
+    <string name="menu_main_settings">Settings</string>
+
+    <!--Character-->
+    <string name="character_page__name">Name</string>
+    <string name="character_page__status">Status</string>
+    <string name="character_page__species">Species</string>
+    <string name="character_page__type">Type</string>
+    <string name="character_page__gender">Gender</string>
+    <string name="character_page__origin">Origin</string>
+    <string name="character_page__location">Location</string>
+
+    <!--Settings-->
+    <string name="settings_switch">Allow app to rotate</string>
+
+    <!--Preferences-->
+    <string name="pref_file_key">SettingsPref</string>
+    <string name="pref_file_rotate">Rotate</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
