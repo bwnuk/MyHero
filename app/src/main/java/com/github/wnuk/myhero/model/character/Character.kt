@@ -1,8 +1,5 @@
 package com.github.wnuk.myhero.model.character
 
-import com.github.wnuk.myhero.model.episode.Episode
-import com.github.wnuk.myhero.model.location.Location
-
 data class Character(
     val id: String,
     val name: String,

@@ -15,7 +15,6 @@ import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
 import com.github.wnuk.myhero.infrastracture.adapters.ListCharacterAdapter
 import com.github.wnuk.myhero.model.character.Character
-import com.github.wnuk.myhero.model.character.CharacterResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -65,7 +64,7 @@ class CharactersListFragment : Fragment() {
     }
 
     private fun handleResponse(result: List<Character>) {
-        Log.d("R", "Response size: ${result.size} ")
+        Log.d("CharacterList", "Response size: ${result.size} ")
         viewModel.listOfCharacters = result
         adapter = ListCharacterAdapter(viewModel.listOfCharacters)
         characters_list_fragment__list.adapter = adapter

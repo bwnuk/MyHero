@@ -1,12 +1,7 @@
 package com.github.wnuk.myhero.model.character
 
-import androidx.room.ColumnInfo
-
 import androidx.room.Entity
-
 import androidx.room.PrimaryKey
-import com.github.wnuk.myhero.model.episode.Episode
-import com.github.wnuk.myhero.model.location.Location
 
 @Entity(tableName = "characters")
 data class CharacterEntity(

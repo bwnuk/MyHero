@@ -12,6 +12,9 @@ class CharacterRepository(private val characterDao: CharacterDao) {
     // Observed LiveData will notify the observer when the data has changed.
     val allCharacter: Observable<List<CharacterEntity>> = characterDao.getAll()
 
+    fun getCharacter(id: String): Observable<CharacterEntity> = characterDao.loadAllByIds(id)
+
+
     suspend fun deleteAll() = characterDao.deleteAll()
 
 

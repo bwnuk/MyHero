@@ -27,13 +27,7 @@ import java.io.File
 import java.io.PrintWriter
 
 class BaseActivity : AppCompatActivity(), ConnectionReceiver.ConnectionRecieverListener {
-    override fun onNetworkConnectionChange(isConnected: Boolean) {
-        if (!isConnected) {
-            Toast.makeText(this, "NO INTERNET", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    var isRotate = false
+    var isAllowToRotate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,8 +69,6 @@ class BaseActivity : AppCompatActivity(), ConnectionReceiver.ConnectionRecieverL
         return true
     }
 
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         startActivity(Intent(this, SettingsActivity::class.java))
@@ -84,7 +76,7 @@ class BaseActivity : AppCompatActivity(), ConnectionReceiver.ConnectionRecieverL
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {
-        if (isRotate) {
+        if (isAllowToRotate) {
             super.setRequestedOrientation(requestedOrientation)
         }else{
             super.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -100,12 +92,18 @@ class BaseActivity : AppCompatActivity(), ConnectionReceiver.ConnectionRecieverL
         }
     }
 
+    override fun onNetworkConnectionChange(isConnected: Boolean) {
+        if (!isConnected) {
+            Toast.makeText(this, "NO INTERNET", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun pref() {
         val sharedPref = this.getSharedPreferences(
             getString(R.string.pref_file_key), Context.MODE_PRIVATE) ?: return
-        isRotate = sharedPref.getBoolean(getString(R.string.pref_file_rotate), true)
-        Log.d("BaseActivity", "SharedPreferences: ${isRotate}")
-        if (isRotate) {
+        isAllowToRotate = sharedPref.getBoolean(getString(R.string.pref_file_rotate), true)
+        Log.d("BaseActivity", "SharedPreferences: ${isAllowToRotate}")
+        if (isAllowToRotate) {
             this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
         }
     }

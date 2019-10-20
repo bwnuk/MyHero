@@ -12,7 +12,7 @@ interface CharacterDao{
     fun getAll(): Observable<List<CharacterEntity>>
 
     @Query("SELECT * FROM characters WHERE id IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): Observable<List<CharacterEntity>>
+    fun loadAllByIds(userIds: String): Observable<CharacterEntity>
 
     @Insert
     fun insertAll(vararg characters: CharacterEntity)

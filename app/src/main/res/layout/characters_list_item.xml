@@ -35,18 +35,20 @@
                         android:id="@+id/character_list_item__image"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
-                        android:layout_weight="1"
+                        android:layout_weight="1.2"
                         android:src="@drawable/temp" />
 
                     <androidx.legacy.widget.Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:layout_weight="0.8" />
 
                     <TextView
                         android:id="@+id/character_list_item__name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="end"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:text="@{model.character.name}"
                         tools:text="Rick Sanches" />

@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.infrastracture.db.CharacterDb
@@ -23,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 
 class MainViewModel(application: Application) :  AndroidViewModel(application) {
     var listOfCharacters: List<Character> = emptyList()
-    val charactersss : Observable<List<CharacterEntity>>
+    val dbCharacters : Observable<List<CharacterEntity>>
     private var parentJob = Job()
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
@@ -35,7 +34,7 @@ class MainViewModel(application: Application) :  AndroidViewModel(application) {
         // the correct WordRepository.
         val characterDao = CharacterDb.getDatabase(application).characterDao()
         repository = CharacterRepository(characterDao)
-        charactersss = repository.allCharacter
+        dbCharacters = repository.allCharacter
     }
 
     fun onCharacterClick(view: View){

@@ -21,7 +21,12 @@
         tools:layout="@layout/characters_list_fragment" >
         <action
             android:id="@+id/character_list_action"
-            app:destination="@id/characterFragment" />
+            app:destination="@id/characterFragment">
+            <argument
+                android:name="idCharacter"
+                app:argType="string"
+                android:defaultValue="null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/characterFragment"

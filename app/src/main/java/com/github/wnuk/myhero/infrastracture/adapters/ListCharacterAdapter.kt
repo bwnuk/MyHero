@@ -1,5 +1,6 @@
 package com.github.wnuk.myhero.infrastracture.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -34,7 +35,10 @@ class ListCharacterAdapter (private var list: List<Character>) : RecyclerView.Ad
         fun bind(character: Character, position: Int){
             binding.setVariable(BR.model, CharacterItemViewModel(character))
             itemView.character_list_item__item.setOnClickListener { view ->
-                view.findNavController().navigate(R.id.character_list_action)
+                var bundle = bundleOf("idCharacter" to character.id)
+                Log.d("ListCharacterAdapter", "Argument: ${position} i ${character.id}")
+
+                view.findNavController().navigate(R.id.character_list_action, bundle)
             }
         }
     }

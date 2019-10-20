@@ -1,12 +1,18 @@
 package com.github.wnuk.myhero.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.wnuk.myhero.R
+import com.github.wnuk.myhero.infrastracture.db.CharacterDb
+import com.github.wnuk.myhero.infrastracture.repository.CharacterRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
+import kotlin.coroutines.CoroutineContext
 
 class StartActivity : AppCompatActivity() {
 

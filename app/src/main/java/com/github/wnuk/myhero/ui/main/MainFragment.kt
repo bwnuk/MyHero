@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
 
         result.results.forEach{viewModel.insert(CharacterEntity(it))}
 
-        myCompositeDisposable?.add(viewModel.charactersss
+        myCompositeDisposable?.add(viewModel.dbCharacters
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({ result ->
