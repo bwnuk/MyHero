@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
 import com.github.wnuk.myhero.infrastracture.adapters.ListCharacterAdapter
+import com.github.wnuk.myhero.infrastracture.adapters.PaginationListener
 import com.github.wnuk.myhero.model.character.Character
+import com.github.wnuk.myhero.model.character.CharacterEntity
+import com.github.wnuk.myhero.model.character.CharacterResult
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -31,6 +34,9 @@ class CharactersListFragment : Fragment() {
     private lateinit var adapter: ListCharacterAdapter
     private var myCompositeDisposable: CompositeDisposable? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
+    private var isLoading: Boolean = false
+    private var isLastPage: Boolean = false
+    var pageCounter: Int = 2
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,8 +72,58 @@ class CharactersListFragment : Fragment() {
     private fun handleResponse(result: List<Character>) {
         Log.d("CharacterList", "Response size: ${result.size} ")
         viewModel.listOfCharacters = result
-        adapter = ListCharacterAdapter(viewModel.listOfCharacters)
+        adapter = ListCharacterAdapter(viewModel.listOfCharacters as ArrayList<Character>)
         characters_list_fragment__list.adapter = adapter
+        characters_list_fragment__list.addOnScrollListener(object : PaginationListener(layoutManager as LinearLayoutManager) {
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                //you have to call loadmore items to get more data
+                getMoreItems()
+            }
+        })
+    }
+
+    fun getMoreItems() {
+        Log.d("CharactersListFragment", "LoadMoreItems page: ${pageCounter}")
+
+        myCompositeDisposable?.add(viewModel.loadData(pageCounter)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({ result ->
+                loadMoreResults(result)
+            }, { error ->
+                error.printStackTrace()
+            })
+        )
+        pageCounter++
+    }
+
+    private fun loadMoreResults(result: CharacterResult) {
+        Log.d("Result CharacterPages", "Response size: ${result.info.pages} Next request: ${result.info.next}")
+
+        result.results.forEach{viewModel.insert(CharacterEntity(it))}
+
+        myCompositeDisposable?.add(viewModel.charactersObservable
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({ result ->
+                run {
+                    viewModel.respone(result.map { Character(it) })
+                    adapter.addData(result.map { Character(it) } as ArrayList<Character>)
+                    isLoading = false
+                }
+            }, { error ->
+                error.printStackTrace()
+            })
+        )
     }
 
     override fun onDestroyView() {

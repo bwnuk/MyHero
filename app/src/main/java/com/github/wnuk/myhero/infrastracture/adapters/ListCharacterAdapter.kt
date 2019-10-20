@@ -14,12 +14,19 @@ import com.github.wnuk.myhero.model.character.Character
 import com.github.wnuk.myhero.ui.character.CharacterItemViewModel
 import kotlinx.android.synthetic.main.characters_list_item.view.*
 
-class ListCharacterAdapter (private var list: List<Character>) : RecyclerView.Adapter<ListCharacterAdapter.DataBindingViewHolder>(){
+class ListCharacterAdapter (private val list: ArrayList<Character>) : RecyclerView.Adapter<ListCharacterAdapter.DataBindingViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder {
 
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return DataBindingViewHolder(binding)
+    }
+
+    fun addData(listItems: ArrayList<Character>) {
+        var size = list.size
+        list.addAll(listItems)
+        var sizeNew =  listItems.size
+        notifyItemRangeChanged(size, sizeNew)
     }
 
     override fun getItemCount(): Int = list.count()

@@ -3,7 +3,6 @@ package com.github.wnuk.myhero.ui.character
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -13,13 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.wnuk.myhero.R
 import com.github.wnuk.myhero.databinding.CharacterFragmentBinding
-import com.github.wnuk.myhero.databinding.CharactersListFragmentBinding
-import com.github.wnuk.myhero.infrastracture.adapters.ListCharacterAdapter
 import com.github.wnuk.myhero.model.character.Character
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.characters_list_fragment.*
 
 class CharacterFragment : Fragment() {
 
@@ -44,8 +40,9 @@ class CharacterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d("CharacterFragment", "Argument: ${arguments!!.getString("idCharacter")}")
         var characterId: String = arguments!!.getString("idCharacter")
+        Log.d("CharacterFragment", "Argument: $characterId")
+
         itemViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
 
         myCompositeDisposable = CompositeDisposable()
@@ -63,7 +60,7 @@ class CharacterFragment : Fragment() {
     }
 
     private fun handleResponse(result: Character) {
-        Log.d("CharacterFragment", "Character choosen: ${result.name} ")
+        Log.d("CharacterFragment", "Character choosed: ${result.name} ")
         itemViewModel.setUpCharacter(character = result)
     }
 }

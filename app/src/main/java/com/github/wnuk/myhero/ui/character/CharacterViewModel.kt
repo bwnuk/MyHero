@@ -1,9 +1,7 @@
 package com.github.wnuk.myhero.ui.character
 
 import android.app.Application
-import androidx.databinding.BaseObservable
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.github.wnuk.myhero.infrastracture.db.CharacterDb
 import com.github.wnuk.myhero.infrastracture.repository.CharacterRepository
 import com.github.wnuk.myhero.model.character.Character
