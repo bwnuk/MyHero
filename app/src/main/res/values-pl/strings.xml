@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Hero</string>
+    <string name="app_name">RnM Characters</string>
     <string name="character_page__gender">Płeć</string>
     <string name="character_page__location">Lokalizacja</string>
     <string name="character_page__name">Imię</string>

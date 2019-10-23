@@ -11,19 +11,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="@dimen/menu_margin"
-        android:padding="@dimen/small_padding">
+        android:padding="@dimen/small_padding"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/menu_margin"
+        android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="@string/settings_switch"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/settings_switch"
+            android:layout_margin="@dimen/small_space" />
         <Switch
             android:id="@+id/settings_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/small_space"/>
+            android:layout_margin="@dimen/small_space" />
     </LinearLayout>
 
 </LinearLayout>

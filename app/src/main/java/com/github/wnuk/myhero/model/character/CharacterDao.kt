@@ -1,9 +1,6 @@
 package com.github.wnuk.myhero.model.character
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import io.reactivex.Observable
 
 @Dao
@@ -17,7 +14,7 @@ interface CharacterDao{
     @Insert
     fun insertAll(vararg characters: CharacterEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(vararg characters: CharacterEntity)
 
     @Delete

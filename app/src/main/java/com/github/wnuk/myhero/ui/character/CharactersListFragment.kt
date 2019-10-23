@@ -85,7 +85,6 @@ class CharactersListFragment : Fragment() {
 
             override fun loadMoreItems() {
                 isLoading = true
-                //you have to call loadmore items to get more data
                 getMoreItems()
             }
         })
