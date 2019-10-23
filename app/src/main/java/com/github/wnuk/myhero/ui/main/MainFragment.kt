@@ -50,8 +50,6 @@ class MainFragment : Fragment() {
             })
         )
 
-        viewModel.deleteAll()
-
         card_view_characters.setOnClickListener { view ->
             view.findNavController().navigate(R.id.character_action)
         }

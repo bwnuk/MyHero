@@ -25,7 +25,7 @@ public abstract class CharacterDb : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CharacterDb::class.java,
-                    "character_database4"
+                    "character_database5"
                 )
                     .build()
                 INSTANCE = instance

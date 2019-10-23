@@ -30,8 +30,6 @@ class MainViewModel(application: Application) :  AndroidViewModel(application) {
     private val scope = CoroutineScope(coroutineContext)
 
     init {
-        // Gets reference to WordDao from WordRoomDatabase to construct
-        // the correct WordRepository.
         val characterDao = CharacterDb.getDatabase(application).characterDao()
         repository = CharacterRepository(characterDao)
         dbCharacters = repository.allCharacter

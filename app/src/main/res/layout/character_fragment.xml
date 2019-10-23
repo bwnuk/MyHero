@@ -98,6 +98,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.status}"
+                            android:maxLength="8"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -124,6 +126,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.type}"
+                            android:maxLength="7"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -159,6 +163,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.gender}"
+                            android:maxLength="8"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -185,6 +191,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.origin}"
+                            android:maxLength="8"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -220,6 +228,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.location}"
+                            android:maxLength="8"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -246,6 +256,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@{character.species}"
+                            android:maxLength="8"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
                 </LinearLayout>

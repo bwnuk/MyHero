@@ -2,14 +2,14 @@ package com.github.wnuk.myhero.infrastracture.repository
 
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Transaction
+import androidx.room.Update
 import com.github.wnuk.myhero.model.character.CharacterDao
 import com.github.wnuk.myhero.model.character.CharacterEntity
 import io.reactivex.Observable
 
 class CharacterRepository(private val characterDao: CharacterDao) {
 
-    // Room executes all queries on a separate thread.
-    // Observed LiveData will notify the observer when the data has changed.
     val allCharacter: Observable<List<CharacterEntity>> = characterDao.getAll()
 
     fun getCharacter(id: String): Observable<CharacterEntity> = characterDao.loadAllByIds(id)
@@ -18,9 +18,7 @@ class CharacterRepository(private val characterDao: CharacterDao) {
     suspend fun deleteAll() = characterDao.deleteAll()
 
 
-    // The suspend modifier tells the compiler that this must be called from a
-    // coroutine or another suspend function.
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(character: CharacterEntity) {
         characterDao.insert(character)
     }
